@@ -1,5 +1,8 @@
 package com.example.ajn.wifimanager;
 
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,8 +45,22 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
         toast.show();;
         //MainActivity.tvresult.setText(rawResult.getText());
         //onBackPressed();
+        String message = rawResult.getText();
+        message = "Moto M,maddymaddy";
+        String[] separated = message.split(",");
 
+        WifiConfiguration wifiConfig = new WifiConfiguration();
+        wifiConfig.SSID = String.format("\"%s\"", separated[0]);
+        wifiConfig.preSharedKey = String.format("\"%s\"", separated[1]);
+
+        WifiManager wifiManager = (WifiManager)getApplicationContext().getSystemService(WIFI_SERVICE);
+//remember id
+        wifiManager.setWifiEnabled(true);
+        int netId = wifiManager.addNetwork(wifiConfig);
+        wifiManager.disconnect();
+        wifiManager.enableNetwork(netId, true);
+        wifiManager.reconnect();
         // If you would like to resume scanning, call this method below:
-        mScannerView.resumeCameraPreview(this);
+        //mScannerView.resumeCameraPreview(this);
     }
 }
