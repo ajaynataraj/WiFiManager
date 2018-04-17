@@ -73,6 +73,7 @@ public class MethodChooserActivity extends AppCompatActivity {
 
                     //Check whether the device has a fingerprint sensor//
                     if (!fingerprintManager.isHardwareDetected()) {
+                        startActivity(new Intent(MethodChooserActivity.this,QRGeneratorActivity.class));
                         // If a fingerprint sensor isn’t available, then inform the user that they’ll be unable to use your app’s fingerprint functionality//
                         //textView.setText("Your device doesn't support fingerprint authentication");
                     }
@@ -86,6 +87,8 @@ public class MethodChooserActivity extends AppCompatActivity {
                     if (!fingerprintManager.hasEnrolledFingerprints()) {
                         // If the user hasn’t configured any fingerprints, then display the following message//
                         //textView.setText("No fingerprint configured. Please register at least one fingerprint in your device's Settings");
+                        startActivity(new Intent(MethodChooserActivity.this,QRGeneratorActivity.class));
+
                     }
 
                     //Check that the lockscreen is secured//

@@ -126,13 +126,15 @@ public class QRGeneratorActivity extends AppCompatActivity {
                     progress.show();
                     wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
                     wifiInfo = wifiManager.getConnectionInfo();
+                    WifiConfiguration wifiConfig;
                     Method getConfigMethod = null;
                     try {
                         getConfigMethod = wifiManager.getClass().getMethod("getWifiApConfiguration");
-                        WifiConfiguration wifiConfig = (WifiConfiguration) getConfigMethod.invoke(wifiManager);
+                        wifiConfig = (WifiConfiguration) getConfigMethod.invoke(wifiManager);
 //                        getConfigMethod = wifiManager.getClass().getMethod("getWifiApState");
 //                        int wifiConfig = (int) getConfigMethod.invoke(wifiManager);
-                        Log.d("wifissid", wifiConfig.toString()+" hello");
+                        Log.d("wifissid", wifiConfig.preSharedKey+" hello");
+                        new ConvertToImage().execute(wifiConfig.SSID+","+wifiConfig.preSharedKey);
                     } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                         e.printStackTrace();
                     }
@@ -140,7 +142,7 @@ public class QRGeneratorActivity extends AppCompatActivity {
 
 //                    Log.d("wifiInfo", wifiInfo.toString());
 //                    Log.d("SSID",wifiInfo.getSSID());
-                    new ConvertToImage().execute(wifiInfo.getSSID());
+
                 } else {
                     Toast.makeText(QRGeneratorActivity.this, "Please select any one of the option", Toast.LENGTH_SHORT).show();
                     progress.dismiss();
