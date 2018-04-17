@@ -8,13 +8,52 @@
     tools:context=".QRGeneratorActivity">
 
 
-    <EditText
-        android:id="@+id/editText_wifi_password"
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Wifi Name and Password" />
+        >
+
+        <RadioButton
+            android:id="@+id/radioButton_wifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Custom Wifi" />
+
+        <RadioButton
+            android:id="@+id/radioButton_hotspot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Phone's Hotspot" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_dynamic"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editText_wifi_ssid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="WiFi's Name" />
+
+        <EditText
+            android:id="@+id/editText_wifi_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="WiFi's Password" />
+
+    </LinearLayout>
+
+
 
     <Button
         android:id="@+id/button_generate"
